@@ -18,12 +18,14 @@ public class Cus2product {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("_______Restaurant_______");
-            System.out.println("1. Show menu");
-            System.out.println("2. Exit");
-            System.out.println("________________________");
+            System.out.println("\n_______ETFOODORDERNG_______");
+            System.out.println("1.'Show menu'");
+            System.out.println("2.'My Bill'");
+            System.out.println("3. Exit");
+            System.out.println("___________________________");
+            System.out.println("\nType ur choice... ");
 
-            String choice = scanner.nextLine();
+            String choice = scanner.next();
 
             if(choice.equalsIgnoreCase("show menu")) {
                 clearConsole();
@@ -64,7 +66,7 @@ public class Cus2product {
 
         try (FileWriter file = new FileWriter("./customer.json")) {
             file.write(jsonarray.toString());
-            System.out.println("Insert Data To Json Successfully");
+            System.out.println("Insert Customer_Data To Json Successfully");
         } catch (IOException e) {
             System.out.println("Handle exception can not found file");
             e.printStackTrace();
@@ -104,6 +106,7 @@ public class Cus2product {
 
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -117,6 +120,10 @@ public class Cus2product {
         Scanner input = new Scanner(System.in);
         System.out.print("Select Food : ");
         product_no = input.nextLine();
+
+                if (product_no.equalsIgnoreCase("back")) {
+                    return;  
+                }
 
         try {
             Reader readProduct = new FileReader("./Product.json");
@@ -153,6 +160,9 @@ public class Cus2product {
                         cusOrder.put("Product_Price", tumm.getTprice());
                         ordersArray.add(cusOrder);
 
+                    }else {
+                        System.out.println("/this product unavaliable now/");
+                        break;
                     }
                 }
                 for (Object yumObj : yumArray) {
@@ -180,6 +190,9 @@ public class Cus2product {
                         // JSONArray order = new JSONArray();
                         ordersArray.add(cusOrder);
 
+                    }else {
+                        System.out.println("/this product unavaliable now/");
+                        break;
                     }
 
                 }
@@ -208,7 +221,7 @@ public class Cus2product {
                 // Write the merged orders back to order.json
                 try (FileWriter file = new FileWriter("./order.json")) {
                     file.write(oldOrder.toString());
-                    System.out.println("Insert Data To Json Successfully");
+                    System.out.println("Sended ur order to waiter...");
                 } catch (IOException e) {
                     System.out.println("Handle exception can not found file");
                     e.printStackTrace();
