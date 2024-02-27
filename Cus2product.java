@@ -12,30 +12,36 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class Cus2product {
-
-    public static void main(String[] args) {
-        
+    public static void Customer() {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
             System.out.println("\n_______ETFOODORDERNG_______");
             System.out.println("1.'Show menu'");
             System.out.println("2.'My Bill'");
-            System.out.println("3. Exit");
+            System.out.println("3. Return main menu");
             System.out.println("___________________________");
             System.out.println("\nType ur choice... ");
 
             String choice = scanner.next();
 
-            if(choice.equalsIgnoreCase("show menu")) {
+            if (choice.equalsIgnoreCase("1")) {
                 clearConsole();
                 ShowMenu();
-            }else if(choice.equalsIgnoreCase("exit")) {
-                System.out.println("Exiting the program. Goodbye!");
-                System.exit(0);
 
-            }else {
+            } else if (choice.equalsIgnoreCase("2")) {
+                System.out.println("eiei ");
+
+            } else if (choice.equalsIgnoreCase("3")) {
+                clearConsole();
+                Index indexpage = new Index();
+                indexpage.Mainpage();
+                break;
+                // System.out.println("Exiting the program. Goodbye!");
+                // System.exit(0);
+            } else {
                 System.out.println("Invalid choice. Please try again.");
+
             }
         }
 
@@ -48,9 +54,9 @@ public class Cus2product {
         String product_name;
         double product_price;
         Customer cus = new Customer();
-        cus.setName("wan");
-        cus.setPnumber("0621645650");
-        cus.setTableno("T_12");
+        cus.setName("nior");
+        cus.setPnumber("06111223333");
+        cus.setTableno("T_13");
         cus.calDate();
         cus.printInfo();
 
@@ -66,14 +72,12 @@ public class Cus2product {
 
         try (FileWriter file = new FileWriter("./customer.json")) {
             file.write(jsonarray.toString());
-            System.out.println("Insert Customer_Data To Json Successfully");
+            System.out.println("Insert Data To Json Successfully");
         } catch (IOException e) {
             System.out.println("Handle exception can not found file");
             e.printStackTrace();
 
         }
-
-        //read product.json
         System.out.println("=====================Read=====================");
 
         JSONParser parser = new JSONParser();
@@ -106,26 +110,20 @@ public class Cus2product {
 
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-
-        //select product
         System.out.println("===================Select====================");
 
         Scanner input = new Scanner(System.in);
         System.out.print("Select Food : ");
         product_no = input.nextLine();
 
-                if (product_no.equalsIgnoreCase("back")) {
-                    return;  
-                }
-
         try {
+
             Reader readProduct = new FileReader("./Product.json");
             JSONArray productArray = (JSONArray) parser.parse(readProduct);
             JSONArray ordersArray = new JSONArray();
@@ -160,11 +158,9 @@ public class Cus2product {
                         cusOrder.put("Product_Price", tumm.getTprice());
                         ordersArray.add(cusOrder);
 
-                    }else {
-                        System.out.println("/this product unavaliable now/");
-                        break;
                     }
                 }
+
                 for (Object yumObj : yumArray) {
                     JSONObject yum = (JSONObject) yumObj;
                     if (yum != null && product_no.equals(String.valueOf(yum.get("Product_No")))) {
@@ -186,20 +182,17 @@ public class Cus2product {
                         cusOrder.put("Product_No", yumm.getPno());
                         cusOrder.put("Product_Name", yumm.getTname());
                         cusOrder.put("Product_Price", yumm.getTprice());
+                        cusOrder.put("Status","Not yet confirmed");
 
                         // JSONArray order = new JSONArray();
                         ordersArray.add(cusOrder);
 
-                    }else {
-                        System.out.println("/this product unavaliable now/");
-                        break;
                     }
 
                 }
 
             }
-
-            //put order
+            
             System.out.println("===================putorder====================");
 
             try {
@@ -221,7 +214,7 @@ public class Cus2product {
                 // Write the merged orders back to order.json
                 try (FileWriter file = new FileWriter("./order.json")) {
                     file.write(oldOrder.toString());
-                    System.out.println("Sended ur order to waiter...");
+                    System.out.println("Insert Data To Json Successfully");
                 } catch (IOException e) {
                     System.out.println("Handle exception can not found file");
                     e.printStackTrace();
