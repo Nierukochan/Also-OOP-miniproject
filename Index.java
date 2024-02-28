@@ -24,7 +24,7 @@ public class Index {
             System.out.println("Select you Role");
             System.out.println("1:Customer");
             System.out.println("2:Employee");
-            System.out.println("3:Employee");
+            System.out.println("3:Admin");
             System.out.println("4:Exit");
             System.out.print("Enter your Role : ");
             if (input.hasNextInt()) {

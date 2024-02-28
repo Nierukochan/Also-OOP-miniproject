@@ -15,19 +15,52 @@ public class Calemp {
 
     public static void Emp() {
 
-        String emp_no, table_no;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter your Employee ID...");
+        String empno_input = input.nextLine();
+        //String emp_name;
+
+        JSONParser parser = new JSONParser();
+
+        try {
+            
+            Reader readEmp = new FileReader("./employee.json");
+            JSONArray empArray = (JSONArray) parser.parse(readEmp);
+
+            Iterator<JSONObject> iterator = empArray.iterator();
+            while (iterator.hasNext()) {
+                JSONObject objectEmployee = iterator.next();
+
+                if (objectEmployee != null && empno_input.equals(String.valueOf(objectEmployee.get("Emp_no")))) {
+                   
+                    Employee emp = new Employee();
+                    emp.setName((String) objectEmployee.get("Emp_name"));
+                    emp.setPnumber((String)objectEmployee.get("Emp_tel"));
+                    emp.setEmpno((String)objectEmployee.get("Emp_no"));
+                    ViewOrder();
+
+                }
+
+            }
+
+        } catch (IOException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void ViewOrder() {
+
+        String emp_no, table_no ,phone;
+        String status = "Not yet confirmed";
         double sumprice = 0.0;
         int i = 1;
         Scanner input = new Scanner(System.in);
 
-        Employee emp = new Employee();
-        emp = new Employee();
-        emp.setName("emp01");
-        emp.setPnumber("082431525");
-        emp.setEmpno("E001");
 
-        // System.out.print("Select Table : ");
-        // table_no = input.nextLine();
         System.out.println("===================View Order===================");
 
         JSONParser parser = new JSONParser();
@@ -40,18 +73,29 @@ public class Calemp {
             Iterator<JSONObject> iterator = orderArray.iterator();
             while (iterator.hasNext()) {
                 JSONObject objectOrder = iterator.next();
+
                 table_no = (String) objectOrder.get("Customer_Table_No");
+                phone = (String) objectOrder.get("Customer_Phone_number");
 
-                if (!uniqueTableNumbers.contains(table_no)) {
-                    System.out.println("Table No: " + table_no);
-                    uniqueTableNumbers.add(table_no);
-
+                if(status.equals(String.valueOf(objectOrder.get("Status")))) {
+                     System.out.println("Table No: " + table_no);
+                     System.out.println("Customer phone number: " + phone);
+                     System.out.println("_______________________________");
                 }
+                // table_no = (String) objectOrder.get("Customer_Table_No");
+
+                // if (!uniqueTableNumbers.contains(table_no)) {
+                //     System.out.println("Table No: " + table_no);
+                //     uniqueTableNumbers.add(table_no);
+
+                // }
+
             }
+
             System.out.println("==================Select Order==================");
             System.out.print("Enter Calculate Table No : ");
             table_no = input.nextLine();
-            System.out.println("Table No : " + table_no);
+            System.out.println("Customer Tel : " + table_no);
             System.out.println("===================== " + table_no + " =====================");
 
             for (Object obj : orderArray) {
@@ -72,5 +116,7 @@ public class Calemp {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
     }
+
 }

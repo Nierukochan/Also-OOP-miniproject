@@ -156,6 +156,7 @@ public class Cus2product {
                         cusOrder.put("Product_No", tumm.getPno());
                         cusOrder.put("Product_Name", tumm.getTname());
                         cusOrder.put("Product_Price", tumm.getTprice());
+                        cusOrder.put("Status", "Not yet Confirmed");
                         ordersArray.add(cusOrder);
 
                     }
