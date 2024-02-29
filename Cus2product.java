@@ -156,7 +156,7 @@ public class Cus2product {
                         cusOrder.put("Product_No", tumm.getPno());
                         cusOrder.put("Product_Name", tumm.getTname());
                         cusOrder.put("Product_Price", tumm.getTprice());
-                        cusOrder.put("Status", "Not yet Confirmed");
+                        //cusOrder.put("Status", "Not yet Confirmed");
                         ordersArray.add(cusOrder);
 
                     }
@@ -183,7 +183,7 @@ public class Cus2product {
                         cusOrder.put("Product_No", yumm.getPno());
                         cusOrder.put("Product_Name", yumm.getTname());
                         cusOrder.put("Product_Price", yumm.getTprice());
-                        cusOrder.put("Status","Not yet confirmed");
+                        //cusOrder.put("Status","Not yet confirmed");
 
                         // JSONArray order = new JSONArray();
                         ordersArray.add(cusOrder);

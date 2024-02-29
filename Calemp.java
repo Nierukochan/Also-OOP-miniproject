@@ -54,8 +54,9 @@ public class Calemp {
 
     public static void ViewOrder() {
 
-        String emp_no, table_no ,phone;
-        String status = "Not yet confirmed";
+        String emp_no, select_phone ,phone,table_no;
+        String status = "Confirm";
+        //String itemconfirmed = "Confirmed_Items";
         double sumprice = 0.0;
         int i = 1;
         Scanner input = new Scanner(System.in);
@@ -65,7 +66,7 @@ public class Calemp {
 
         JSONParser parser = new JSONParser();
         try {
-            Reader readOrder = new FileReader("./order.json");
+            Reader readOrder = new FileReader("./confirmOrder.json");
             JSONArray orderArray = (JSONArray) parser.parse(readOrder);
 
             Set<String> uniqueTableNumbers = new HashSet<>();
@@ -74,37 +75,36 @@ public class Calemp {
             while (iterator.hasNext()) {
                 JSONObject objectOrder = iterator.next();
 
-                table_no = (String) objectOrder.get("Customer_Table_No");
-                phone = (String) objectOrder.get("Customer_Phone_number");
 
-                if(status.equals(String.valueOf(objectOrder.get("Status")))) {
+                table_no = (String) objectOrder.get("Customer_Table_No");
+                phone = (String) objectOrder.get("Customer_Phone_name");
+
+                if(status.equals(String.valueOf(objectOrder.get("Customer_Confirm_Status")))) {
                      System.out.println("Table No: " + table_no);
                      System.out.println("Customer phone number: " + phone);
                      System.out.println("_______________________________");
                 }
-                // table_no = (String) objectOrder.get("Customer_Table_No");
-
-                // if (!uniqueTableNumbers.contains(table_no)) {
-                //     System.out.println("Table No: " + table_no);
-                //     uniqueTableNumbers.add(table_no);
-
-                // }
-
             }
 
+                    
             System.out.println("==================Select Order==================");
-            System.out.print("Enter Calculate Table No : ");
-            table_no = input.nextLine();
-            System.out.println("Customer Tel : " + table_no);
-            System.out.println("===================== " + table_no + " =====================");
+            System.out.print("Enter Phone number for create bill : ");
+            select_phone = input.nextLine();
+            System.out.println("Customer Tel : " + select_phone);
+            System.out.println("===================== " + select_phone + " =====================");
 
             for (Object obj : orderArray) {
                 JSONObject objectOrder = (JSONObject) obj;
-                if (objectOrder != null && table_no.equals(String.valueOf(objectOrder.get("Customer_Table_No")))) {
-                    System.out.println(i + " Order: " + objectOrder.get("Product_Name") + " : "
-                            + objectOrder.get("Product_Price"));
-                            sumprice += ((Double)objectOrder.get("Product_Price"));
-                    i += 1;
+                JSONArray itemList = (JSONArray) objectOrder.get("Confirmed_Items");
+
+                if (objectOrder != null && select_phone.equals(String.valueOf(objectOrder.get("Customer_Phone_name")))) {
+                    for (Object item : itemList) {
+                        JSONObject itemObject = (JSONObject) item;
+                        System.out.println(i + " Order: " + itemObject.get("Product_Name") + " : "
+                                + itemObject.get("Product_Price"));
+                        sumprice += ((Double) itemObject.get("Product_Price"));
+                        i += 1;
+                    }
                 }
 
             }
