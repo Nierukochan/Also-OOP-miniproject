@@ -57,6 +57,7 @@ public class Calemp {
 
         String emp_no, select_phone ,phone,table_no;
         String status = "Confirm";
+        String newStatus = "Checked";
         //String itemconfirmed = "Confirmed_Items";
         double sumprice = 0.0;
         int i = 1;
@@ -105,6 +106,8 @@ public class Calemp {
 
                     JSONObject billObject = new JSONObject();
 
+                    objectOrder.put("Customer_Confirm_Status", newStatus);
+
                     billObject.put("Bill_no.", "bill_001");
                     billObject.put("Customer_Name", objectOrder.get("Customer_Name"));
                     billObject.put("Phone_name", objectOrder.get("Customer_Phone_number"));
@@ -119,14 +122,23 @@ public class Calemp {
                         sumprice += ((Double) itemObject.get("Product_Price"));
                         i += 1;
                     }
-
                     billObject.put("Total", sumprice);
+                    billObject.put("Vat(7%)",(Double)(sumprice/100)*7.00);
                     nbillArray.add(billObject);
                 }
 
             }
             System.out.println("Total : "+sumprice);
             System.out.println("====================== End ======================");
+
+            try (FileWriter fileWriter = new FileWriter("./confirmOrder.json")) {
+                fileWriter.write(orderArray.toJSONString());
+                System.out.println("Customer_Confirm_Status updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error writing to the file.");
+                e.printStackTrace();
+            }
+
 
                 try (FileReader reader = new FileReader("./bill.json")) {
                     JSONArray existingBillArray = (JSONArray) parser.parse(reader);

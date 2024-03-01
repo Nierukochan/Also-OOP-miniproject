@@ -1,18 +1,1 @@
-[
-  {
-    "Bill_no.": "bill_001",
-    "Customer_Name": "aaa",
-    "Phone_name": null,
-    "Total": 688.0,
-    "table": "T_13",
-    "Date": null
-  },
-  {
-    "Bill_no.": "bill_001",
-    "Customer_Name": "khing",
-    "Phone_name": null,
-    "Total": 1032.0,
-    "table": "T_13",
-    "Date": null
-  }
-]
+[{"Bill_no.":"bill_001","Customer_Name":"aaa","Phone_name":null,"Total":688.0,"table":"T_13","Date":null},{"Bill_no.":"bill_001","Customer_Name":"khing","Phone_name":null,"Total":1032.0,"table":"T_13","Date":null},{"Bill_no.":"bill_001","Customer_Name":"aaa","Phone_name":null,"Total":688.0,"table":"T_13","Date":null,"Vat(7%)":48.16},{"Bill_no.":"bill_001","Customer_Name":"aaa","Phone_name":null,"Total":688.0,"table":"T_13","Date":null,"Vat(7%)":48.16},{"Bill_no.":"bill_001","Customer_Name":"khing","Phone_name":null,"Total":1032.0,"table":"T_13","Date":null,"Vat(7%)":72.24000000000001},{"Bill_no.":"bill_001","Customer_Name":"aaa","Phone_name":null,"Total":688.0,"table":"T_13","Date":null,"Vat(7%)":48.16},{"Bill_no.":"bill_001","Customer_Name":"khing","Phone_name":null,"Total":1032.0,"table":"T_13","Date":null,"Vat(7%)":72.24000000000001},{"Bill_no.":"bill_001","Customer_Name":"w","Phone_name":null,"Total":344.0,"table":"w","Date":null,"Vat(7%)":24.08}]

@@ -33,7 +33,7 @@
     },
     {
         "Customer_Table_No": "w",
-        "Customer_Confirm_Status": "Confirm",
+        "Customer_Confirm_Status": "Checked",
         "Customer_Name": "w",
         "Total": 344.0,
         "Customer_Confirm_Date": "Thu Feb 29 19:47:56 ICT 2024",
@@ -69,7 +69,7 @@
     },
     {
         "Customer_Table_No": "T_13",
-        "Customer_Confirm_Status": "Confirm",
+        "Customer_Confirm_Status": "Checked",
         "Customer_Name": "aaa",
         "Total": 688.0,
         "Customer_Confirm_Date": "Thu Feb 29 20:03:14 ICT 2024",
@@ -95,7 +95,7 @@
     },
     {
         "Customer_Table_No": "T_13",
-        "Customer_Confirm_Status": "Confirm",
+        "Customer_Confirm_Status": "Checked",
         "Customer_Name": "khing",
         "Total": 1032.0,
         "Customer_Confirm_Date": "Thu Feb 29 20:12:21 ICT 2024",
