@@ -3,6 +3,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.util.HashSet;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -93,11 +94,24 @@ public class Calemp {
             System.out.println("Customer Tel : " + select_phone);
             System.out.println("===================== " + select_phone + " =====================");
 
+            JSONArray nbillArray = new JSONArray(); 
+
             for (Object obj : orderArray) {
                 JSONObject objectOrder = (JSONObject) obj;
                 JSONArray itemList = (JSONArray) objectOrder.get("Confirmed_Items");
 
+
                 if (objectOrder != null && select_phone.equals(String.valueOf(objectOrder.get("Customer_Phone_name")))) {
+
+                    JSONObject billObject = new JSONObject();
+
+                    billObject.put("Bill_no.", "bill_001");
+                    billObject.put("Customer_Name", objectOrder.get("Customer_Name"));
+                    billObject.put("Phone_name", objectOrder.get("Customer_Phone_number"));
+                    billObject.put("table", objectOrder.get("Customer_Table_No"));
+                    billObject.put("Date", objectOrder.get("Customer_Table_Date"));
+
+
                     for (Object item : itemList) {
                         JSONObject itemObject = (JSONObject) item;
                         System.out.println(i + " Order: " + itemObject.get("Product_Name") + " : "
@@ -105,17 +119,41 @@ public class Calemp {
                         sumprice += ((Double) itemObject.get("Product_Price"));
                         i += 1;
                     }
+
+                    billObject.put("Total", sumprice);
+                    nbillArray.add(billObject);
                 }
 
             }
             System.out.println("Total : "+sumprice);
             System.out.println("====================== End ======================");
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+                try (FileReader reader = new FileReader("./bill.json")) {
+                    JSONArray existingBillArray = (JSONArray) parser.parse(reader);
+
+                    // Append new bill data
+                    existingBillArray.addAll(nbillArray);
+
+                    // Write back to bill.json
+                    try (FileWriter file = new FileWriter("./bill.json")) {
+                        file.write(existingBillArray.toJSONString());
+                        System.out.println("Insert Data To Json Successfully");
+                    } catch (IOException e) {
+                        System.out.println("Handle exception cannot find file");
+                        e.printStackTrace();
+                    }
+                } catch (IOException e) {
+                    // TODO: handle exception
+                } catch (ParseException e) {
+
+                }
+
+
+            } catch (IOException e) {
+                // TODO: handle exception
+            } catch (ParseException e) {
+
+            }
 
     }
 

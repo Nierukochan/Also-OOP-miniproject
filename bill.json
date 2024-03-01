@@ -1,0 +1,18 @@
+[
+  {
+    "Bill_no.": "bill_001",
+    "Customer_Name": "aaa",
+    "Phone_name": null,
+    "Total": 688.0,
+    "table": "T_13",
+    "Date": null
+  },
+  {
+    "Bill_no.": "bill_001",
+    "Customer_Name": "khing",
+    "Phone_name": null,
+    "Total": 1032.0,
+    "table": "T_13",
+    "Date": null
+  }
+]
