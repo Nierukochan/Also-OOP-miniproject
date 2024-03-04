@@ -17,8 +17,8 @@ public class Calemp {
     public static void Emp() {
 
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter your Employee ID...");
-        String empno_input = input.nextLine();
+        System.out.print("Enter your Employee ID : ");
+        String empno_input = input.nextLine().toUpperCase();
         // String emp_name;
 
         JSONParser parser = new JSONParser();
@@ -90,6 +90,7 @@ public class Calemp {
         String newStatus = "Checked";
         // String itemconfirmed = "Confirmed_Items";
         double sumprice = 0.0;
+        double vats = 0.0;
         int i = 1;
         Scanner input = new Scanner(System.in);
 
@@ -123,6 +124,7 @@ public class Calemp {
             System.out.println("===================== " + select_phone + " =====================");
 
             JSONArray nbillArray = new JSONArray();
+            JSONArray OrderItems = new JSONArray();
 
             for (Object obj : orderArray) {
                 JSONObject objectOrder = (JSONObject) obj;
@@ -135,21 +137,34 @@ public class Calemp {
 
                     objectOrder.put("Customer_Confirm_Status", newStatus);
 
-                    billObject.put("Bill_no.", "bill_001");
+                    billObject.put("Bill_No", "bill_001");
                     billObject.put("Customer_Name", objectOrder.get("Customer_Name"));
-                    billObject.put("Phone_name", objectOrder.get("Customer_Phone_number"));
-                    billObject.put("table", objectOrder.get("Customer_Table_No"));
-                    billObject.put("Date", objectOrder.get("Customer_Table_Date"));
+                    billObject.put("Customer_Phone_number", objectOrder.get("Customer_Phone_name"));
+                    billObject.put("Customer_Table_No", objectOrder.get("Customer_Table_No"));
+                    billObject.put("Customer_Confirm_Date", objectOrder.get("Customer_Confirm_Date"));
+                   // billObject.put("")
 
                     for (Object item : itemList) {
                         JSONObject itemObject = (JSONObject) item;
                         System.out.println(i + " Order: " + itemObject.get("Product_Name") + " : "
                                 + itemObject.get("Product_Price"));
                         sumprice += ((Double) itemObject.get("Product_Price"));
+
+                        JSONObject OrderItem = new JSONObject();
+
+                        OrderItem.put("Product_Name", itemObject.get("Product_Name"));
+                        OrderItem.put("Product_Price", itemObject.get("Product_Price"));
+
+                        OrderItems.add(OrderItem);
                         i += 1;
                     }
-                    billObject.put("Total", sumprice);
-                    billObject.put("Vat(7%)", (Double) (sumprice / 100) * 7.00);
+
+                    vats = (sumprice / 100) * 7.00;
+
+                    billObject.put("Order", OrderItems);
+                    billObject.put("Bill_net", sumprice);
+                    billObject.put("Bill_Vat",vats );
+                    billObject.put("Bill_Total",(Double) sumprice + vats );
                     nbillArray.add(billObject);
                 }
 

@@ -80,9 +80,9 @@ public class Confirm {
         double sumprice = 0.0;
         int i = 1;
 
-        JSONArray confirmedItems = new JSONArray(); // Create an array to store confirmed items
+        JSONArray confirmedItems = new JSONArray();
         JSONArray confirmarray = new JSONArray();
-
+        clearConsole();
         System.out.println("========== Confirm Order Successfully ==========");
         try {
             File confirmOrderFile = new File("./confirmOrder.json");
@@ -103,7 +103,9 @@ public class Confirm {
                 if (objectOrder != null && cus.getTableno().equals(objectOrder.get("Customer_Table_No"))) {
                     System.out.println(i + " : " + "Product Name: " + objectOrder.get("Product_Name") + " : "
                             + objectOrder.get("Product_Price"));
+                            
                     JSONObject confirmedItem = new JSONObject();
+
                     confirmedItem.put("Product_Name", objectOrder.get("Product_Name"));
                     confirmedItem.put("Product_Price", objectOrder.get("Product_Price"));
 
@@ -152,45 +154,23 @@ public class Confirm {
         Index indexpage = new Index();
         indexpage.Mainpage();
     }
+
+    public static void clearConsole() {
+        try {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows")) {
+                // For Windows
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                // For Unix/Linux
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (final Exception e) {
+            // Handle exceptions
+            e.printStackTrace();
+        }
+    }
 }
 
-// Set<String> uniqueTableNumbers = new HashSet<>();
-
-// Iterator<JSONObject> iterator = orderArray.iterator();
-
-// while (iterator.hasNext()) {
-// JSONObject objectOrder = iterator.next();
-// if (objectOrder != null
-// && cus.getTableno() ==
-// (String.valueOf(objectOrder.get("Customer_Table_No")))) {
-// System.out.println("Product Name : " + objectOrder.get("Product_Name"));
-
-// }
-
-// table_no = (String) objectOrder.get("Customer_Table_No");
-
-// if (!uniqueTableNumbers.contains(table_no)) {
-// System.out.println("Table No: " + table_no);
-// uniqueTableNumbers.add(table_no);
-// }
-// }
-// System.out.println("==================Select Order==================");
-// System.out.print("Enter Table No : ");
-// table_no = input.nextLine();
-// System.out.println("Table No : " + table_no);
-// System.out.println("===================== " + table_no + "
-// =====================");
-
-// for (Object obj : orderArray) {
-// JSONObject objectOrder = (JSONObject) obj;
-
-// if (objectOrder != null &&
-// table_no.equals(String.valueOf(objectOrder.get("Customer_Table_No")))) {
-// System.out.println(i + " Order: " + objectOrder.get("Product_Name") + " : "
-// + objectOrder.get("Product_Price"));
-// sumprice += Double.parseDouble(objectOrder.get("Product_Price").toString());
-// i += 1;
-// }
-// }
-// System.out.println("Total : " + sumprice);
-// System.out.println("===================== End ======================");

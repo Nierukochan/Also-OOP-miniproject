@@ -1,7 +1,17 @@
 [
-  {
-    "Emp_tel": "0797897979",
-    "Emp_name": "Marty",
-    "Emp_no": "emp001"
-  }
+    {
+        "Emp_tel": "0621645650",
+        "Emp_name": "rara",
+        "Emp_no": "EMP001"
+    },
+    {
+        "Emp_tel": "0824315254",
+        "Emp_name": "arar",
+        "Emp_no": "EMP002"
+    },
+    {
+        "Emp_tel": "0824315254",
+        "Emp_name": "nier",
+        "Emp_no": "emp003"
+    }
 ]

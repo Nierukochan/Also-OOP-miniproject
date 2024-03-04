@@ -1,81 +1,61 @@
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.util.Scanner;
+public class Admin extends Info {
+    private String admin_no;
+    public String admin_id;
+    private String admin_pass;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+    public Admin() {
+    }
 
-import java.util.Iterator;
-
-public class Admin {
-
-  public static void admin() {
-    
-    Scanner scanner = new Scanner(System.in);
-    System.out.println("_________Admin_________");
-    System.out.println("[1].Add Employee");
-    System.out.println("[2].Add Admin");
-    System.out.println("[3].Back");
-    System.out.println("_______________________");
-    System.out.println("Type ur choice...");
-
-    String choice = scanner.next();
-
-    if (choice.equalsIgnoreCase("1")) {
-        //clearConsole();
-        AddEmployee();
-
-    } else if (choice.equalsIgnoreCase("2")) {
-        //AddAdmin();
-        System.out.println("eiei ");
-
-    } else if (choice.equalsIgnoreCase("3")) {
-        //clearConsole();
-        Index indexpage = new Index();
-        indexpage.Mainpage();
-        //break;
-    } else {
-        System.out.println("Invalid choice. Please try again.");
+    public Admin(String admin_no,
+            String admin_id,
+            String admin_pass) {
+        this.admin_no = admin_no;
+        this.admin_id = admin_id;
+        this.admin_pass = admin_pass;
 
     }
 
-  }
+    public Admin(String name,
+            String pnumber,
+            String admin_no,
+            String admin_id,
+            String admin_pass) {
+        super(name, pnumber);
+        this.admin_no = admin_no;
+        this.admin_id = admin_id;
+        this.admin_pass = admin_pass;
 
-  
-  public static void AddEmployee() {
+    }
 
-    //add Employee
-    Employee empman = new Employee();
+    public void setAdminno(String admin_no) {
+        this.admin_no = admin_no;
+    }
 
-    empman.setEmpno("emp001");
-    empman.setName("Marty");
-    empman.setPnumber("0797897979");
-    empman.printInfo();
-        
-        JSONArray filelist = new JSONArray();
+    public String getAdminno() {
+        return admin_no;
+    }
 
-            JSONObject obj = new JSONObject();
-            obj.put("Emp_no" , empman.getEmpno());
-            obj.put("Emp_name", empman.getName());
-            obj.put("Emp_tel", empman.getPnumber());
+    public void setAdminid(String admin_id) {
+        this.admin_id = admin_id;
+    }
 
-            filelist.add(obj);
+    public String getAdminid() {
+        return admin_id;
+    }
 
-          //System.out.println("Completed");
+    public void setAdminpass(String admin_pass) {
+        this.admin_pass = admin_pass;
+    }
 
-     try (FileWriter file = new FileWriter("./employee.json")) {
-      file.write(filelist.toJSONString());
-      System.out.println("Completed");      
-      } catch (IOException e) {
-          System.out.println("Handle exception here");
-          e.printStackTrace();
-      }
+    public String getAdminpass() {
+        return admin_pass;
+    }
 
-  }
+    public void printInfo() {
+        super.printInfo();
+        System.out.println("Admin No: "+admin_no);
+        System.out.println("Admin Id: "+admin_id);
+        System.out.println("Admin Pass: "+admin_pass);
 
-  
+    }
 }

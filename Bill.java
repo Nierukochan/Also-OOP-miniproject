@@ -1,6 +1,6 @@
 public class Bill extends Order {
 
-  public String bill_no;
+  public int bill_no;
   public double vat;
   public double total;
   public double net;
@@ -8,23 +8,23 @@ public class Bill extends Order {
   public Bill() {
   }
 
-  public Bill(String bill_no, double bill_vat) {
+  public Bill(int bill_no, double bill_vat) {
     this.bill_no = bill_no;
     this.vat = vat;
   }
 
   public Bill(String order_no,
-      String order_date, String bill_no, double vat) {
+      String order_date, int bill_no, double vat) {
     super(order_no, order_date);
     this.bill_no = bill_no;
     this.vat = vat;
   }
 
-  public void setBillno(String bill_no) {
+  public void setBillno(int bill_no) {
     this.bill_no = bill_no;
   }
 
-  public String getBillno() {
+  public int getBillno() {
     return bill_no;
   }
 
